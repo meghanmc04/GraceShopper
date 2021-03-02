@@ -3,10 +3,27 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const User = db.define('user', {
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
   email: {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false
+  },
+  delivery: {
+    type: Sequelize.STRING
+  },
+  billing: {
+    type: Sequelize.STRING
+  },
+  userStatus: {
+    type: Sequelize.ENUM('user', 'admin'),
+    defaultValue: 'user'
   },
   password: {
     type: Sequelize.STRING,
@@ -68,3 +85,5 @@ User.beforeUpdate(setSaltAndPassword)
 User.beforeBulkCreate(users => {
   users.forEach(setSaltAndPassword)
 })
+
+// "prepare": "if [ -d .git ]; then npm-merge-driver install; fi",
