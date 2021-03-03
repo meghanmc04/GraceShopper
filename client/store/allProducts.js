@@ -10,16 +10,16 @@ const gotAllProducts = products => ({
 })
 
 //thunk
-// export const fetchAllProducts = () => {
-//   return async (dispatch) => {
-//     try {
-//       const {data} = await axios.get('/api/products')
-//       dispatch(gotAllProducts(data))
-//     } catch (err) {
-//       console.log('oh nos, something went wrong!')
-//     }
-//   }
-// }
+export const fetchAllProducts = () => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.get('/api/products')
+      dispatch(gotAllProducts(data))
+    } catch (err) {
+      console.log('oh nos, something went wrong!')
+    }
+  }
+}
 
 const allProducts = []
 
