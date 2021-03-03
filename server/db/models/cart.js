@@ -10,7 +10,7 @@ const Cart = db.define('cart', {
   // 1 - add (+)
   // 2 - remove (-)
   // instances/model method ??
-  // H.W. to conceptulize
+  // homework to do - comment left by Myra here.
 
   //perhaps a method for subtotal
   subTotal: {
