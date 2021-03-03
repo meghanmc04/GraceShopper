@@ -9,4 +9,6 @@ const CartProducts = db.define('cartProducts', {
   }
 })
 
+// add function to increment quantity
+
 module.exports = CartProducts
