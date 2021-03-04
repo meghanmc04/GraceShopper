@@ -42,4 +42,21 @@ router.get('/me', (req, res) => {
   res.json(req.user)
 })
 
+router.put('/me', async (req, res, next) => {
+  try {
+    await User.update(
+      {
+        name: req.body.name,
+        delivery: req.body.address,
+        phone: req.body.phone
+      },
+      {
+        where: req.user.id
+      }
+    )
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.use('/google', require('./google'))
