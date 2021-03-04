@@ -24,10 +24,10 @@ const Product = db.define('product', {
     type: Sequelize.ENUM,
     values: ['skinny', 'bootcut', 'straight', 'highrise', 'flare', 'ripped']
   },
-  price: {
+  price: { // any extra validations we can add?
     type: Sequelize.DECIMAL(10, 2)
   },
-  quantity: {
+  quantity: { // any extra validations we can add?
     type: Sequelize.INTEGER
   },
   imageUrl: {
