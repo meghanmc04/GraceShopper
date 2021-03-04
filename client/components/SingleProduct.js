@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 
 class SingleProduct extends React.Component {
   async componentDidMount() {
-    await this.props.getProduct()
+    await this.props.getProduct(this.props.match.params.id)
   }
 
   render() {
