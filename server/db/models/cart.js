@@ -1,34 +1,47 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
+const {CartProducts} = require('./cartProducts')
 
 const Cart = db.define('cart', {
-  //perhaps a method for subtotal
   subTotal: {
     type: Sequelize.DECIMAL(10, 2),
     defaultValue: 0
+  },
+  active: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 })
 
 Cart.beforeSave(async cart => {
-  console.log('BEFORE UPDATE', cart)
-  const items = await cart.getProducts()
-  let total = 0.0
+  const items = await cart.getProducts({include: CartProducts})
+  let total = 0
   items.forEach(item => {
-    console.log('PRICE', item.price)
-    total += +item.price
+    total += +item.price * item.cartProducts.quantity
   })
   cart.subTotal = parseFloat(total).toFixed(2)
   return cart
 })
+
+Cart.prototype.containsProduct = async function(productId) {
+  let answer = false
+  const productsInCart = await this.getProducts()
+  productsInCart.forEach(product => {
+    if (product.id === productId) {
+      answer = true
+    }
+  })
+  return answer
+}
 
 // Cart.prototype.calculateSubTotal = async function () {
 //   const items = await this.getProducts()
 //   let total = 0.0
 //   items.forEach((item) => {
 //     console.log(parseFloat(item.price).toFixed(2))
-//     total += +item.price
+//     total += Number(item.price)
 //   })
-//   this.subTotal = parseFloat(total).toFixed(2)
+//   this.subTotal = total
 //   return this
 // }
 

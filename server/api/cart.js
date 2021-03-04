@@ -1,11 +1,11 @@
 const router = require('express').Router()
-const {Cart} = require('../db/models')
+const {Cart, CartProducts} = require('../db/models')
 module.exports = router
 
-// GET /api/cart/
-router.get('/', async (req, res, next) => {
+// GET /api/cart/:id
+router.get('/:id', async (req, res, next) => {
   try {
-    const currentCart = await Cart.findByPk('1')
+    const currentCart = await Cart.findByPk(req.params.id)
     await currentCart.save()
     res.send(currentCart)
   } catch (err) {
@@ -17,11 +17,32 @@ router.get('/', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   try {
     const currentCart = await Cart.findByPk(req.params.id)
-    await currentCart.addProduct(4)
-    const updatedCart = await currentCart.save()
-    console.log('CURRENT CART', updatedCart)
-    res.send(updatedCart)
-  } catch (err) {
-    console.log('error in the put /api/cart/:id route', err)
+    if (await currentCart.containsProduct(Number(req.body.id))) {
+      const productInCart = await CartProducts.findOne({
+        where: {
+          cartId: currentCart.id,
+          productId: req.body.id
+        }
+      })
+      productInCart.quantity += 1
+      await productInCart.save()
+    } else {
+      await currentCart.addProduct(req.body.id)
+    }
+    await currentCart.save()
+    res.send(currentCart)
+  } catch (error) {
+    console.log('error in the PUT /api/cart/:id route', error)
+    next(error)
+  }
+})
+
+// PUT /api/cart/checkout/:id
+router.put('/checkout/:id', async (req, res, next) => {
+  try {
+    const currentCart = await Cart.findByPk(req.params.id)
+  } catch (error) {
+    console.log('error in the PUT /api/cart/checkout/:id route', error)
+    next(error)
   }
 })
