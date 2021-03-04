@@ -81,8 +81,16 @@ router.put('/removeItem/:id', async (req, res, next) => {
     } else if (itemToRemove.quantity > 1) {
       itemToRemove.quantity -= 1
       await itemToRemove.save()
+      const currentCart = await Cart.findByPk(req.params.id, {
+        include: Product
+      })
+      await currentCart.save()
     } else {
       itemToRemove.destroy()
+      const currentCart = await Cart.findByPk(req.params.id, {
+        include: Product
+      })
+      await currentCart.save()
     }
     const currentCart = await Cart.findByPk(req.params.id, {
       include: Product
