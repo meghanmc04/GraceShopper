@@ -14,6 +14,7 @@ async function seed() {
   console.log('created users', users)
   const products = [
     {
+      imageUrl: '/red-skinny.jpg',
       size: 'small',
       color: 'red',
       cut: 'skinny',
@@ -21,6 +22,7 @@ async function seed() {
       quantity: 10
     },
     {
+      imageUrl: '/blue-lightwash-skinny.jpg',
       size: 'small',
       color: 'blue light wash',
       cut: 'skinny',
@@ -28,6 +30,7 @@ async function seed() {
       quantity: 10
     },
     {
+      imageUrl: '/blue-darkwash-ripped.webp',
       size: 'medium',
       color: 'blue dark wash',
       cut: 'ripped',
@@ -35,6 +38,7 @@ async function seed() {
       quantity: 10
     },
     {
+      imageUrl: '/floral-skinny.jpg',
       size: 'large',
       color: 'floral',
       cut: 'skinny',
@@ -42,6 +46,7 @@ async function seed() {
       quantity: 10
     },
     {
+      imageUrl: '/pink-skinny.webp',
       size: 'large',
       color: 'pink',
       cut: 'skinny',
@@ -49,9 +54,10 @@ async function seed() {
       quantity: 10
     },
     {
+      imageUrl: '/black-bootcut.webp',
       size: 'small',
-      color: 'floral',
-      cut: 'skinny',
+      color: 'black',
+      cut: 'bootcut',
       price: 30.0,
       quantity: 10
     }
