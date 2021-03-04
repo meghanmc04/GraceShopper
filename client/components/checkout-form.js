@@ -34,7 +34,7 @@ export class Checkout extends React.Component {
       <div>
         <h1>Checkout</h1>
         <h3>Shipping Info</h3>
-        <form name="checkoutShipping" onSubmit={console.log('submitted form!')}>
+        <form name="checkoutShipping" onSubmit={this.handleSubmit}>
           <div>
             <label htmlFor="name">
               <input
@@ -63,6 +63,7 @@ export class Checkout extends React.Component {
                 placeholder="Phone Number"
               />
             </label>
+            <button type="submit">Submit</button>
           </div>
         </form>
       </div>
