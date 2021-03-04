@@ -19,6 +19,16 @@ router.get('/:id', async (req, res, next) => {
 // Write route to create new cart
 // somehow this needs to be linked to a user.
 // First check to see if user has any active carts
+router.post('/', async (req, res, next) => {
+  try {
+    const newCart = await Cart.create(req.body)
+    console.log(newCart)
+    res.send(newCart)
+  } catch (error) {
+    console.log('Error in the POST /api/cart route', error)
+    next(error)
+  }
+})
 
 // PUT /api/cart/:id
 router.put('/:id', async (req, res, next) => {
