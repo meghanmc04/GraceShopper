@@ -1,11 +1,14 @@
 const router = require('express').Router()
-const {Cart, CartProducts} = require('../db/models')
+const {Cart, CartProducts, Product} = require('../db/models')
 module.exports = router
 
 // GET /api/cart/:id
 router.get('/:id', async (req, res, next) => {
   try {
-    const currentCart = await Cart.findByPk(req.params.id)
+    // update to eager load products!!!
+    const currentCart = await Cart.findByPk(req.params.id, {
+      include: Product
+    })
     await currentCart.save()
     res.send(currentCart)
   } catch (err) {
@@ -41,8 +44,35 @@ router.put('/:id', async (req, res, next) => {
 router.put('/checkout/:id', async (req, res, next) => {
   try {
     const currentCart = await Cart.findByPk(req.params.id)
+    currentCart.active = false
+    await currentCart.save()
+    res.send(currentCart)
   } catch (error) {
     console.log('error in the PUT /api/cart/checkout/:id route', error)
+    next(error)
+  }
+})
+
+// Path to delete indiviual items? Should I make new routes for CartProducts or just include them all here?
+// PUT /api/cart/removeItem/:id
+router.put('/removeItem/:id', async (req, res, next) => {
+  try {
+    const itemToRemove = await CartProducts.findByPk(req.body.id)
+    if (!itemToRemove) {
+      res.status(404).send('not found')
+    } else if (itemToRemove.quantity > 1) {
+      itemToRemove.quantity -= 1
+      await itemToRemove.save()
+    } else {
+      itemToRemove.destroy()
+    }
+    const currentCart = await Cart.findByPk(req.params.id, {
+      include: Product
+    })
+    await currentCart.save()
+    res.send(currentCart)
+  } catch (error) {
+    console.log('Error in the PUT /api/cart/removeItem/:id route', error)
     next(error)
   }
 })
