@@ -1,11 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import addUserInfo from '../store/user'
+import {auth} from '../store'
 
 export class Checkout extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      userId: undefined,
       name: '',
       address: '',
       phone: ''
@@ -14,6 +16,7 @@ export class Checkout extends React.Component {
     this.changeAddress = this.changeAddress.bind(this)
     this.changePhone = this.changePhone.bind(this)
   }
+  componentDidMount() {}
 
   changeName(evt) {
     this.setState({name: evt.target.value})
@@ -30,6 +33,8 @@ export class Checkout extends React.Component {
   }
 
   render() {
+    console.log('props checkout-form', this.props)
+    console.log('state checkout-form', this.state)
     return (
       <div>
         <h1>Checkout</h1>
