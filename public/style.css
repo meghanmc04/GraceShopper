@@ -5,12 +5,20 @@ body {
 a {
   text-decoration: none;
 }
+#title {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 
 label {
   display: block;
 }
 
 nav a {
+  /* display: flex;
+  align-items: center; */
+
   display: inline-block;
   margin: 1em;
 }
@@ -18,4 +26,11 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+#jeans {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
 }

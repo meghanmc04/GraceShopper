@@ -1,16 +1,16 @@
 import axios from 'axios'
 
 //action type
-const GET_ALLPRODUCTS = 'GET_ALLPRODUCTS'
+const GOT_ALLPRODUCTS = 'GOT_ALLPRODUCTS'
 
 //action creator
 const gotAllProducts = products => ({
-  type: GET_ALLPRODUCTS,
+  type: GOT_ALLPRODUCTS,
   products
 })
 
 //thunk
-export const fetchAllProducts = () => {
+export const getAllProducts = () => {
   return async dispatch => {
     try {
       const {data} = await axios.get('/api/products')
@@ -21,13 +21,13 @@ export const fetchAllProducts = () => {
   }
 }
 
-const allProducts = []
+const initialState = []
 
 //reducer
-export default function allProductsReducer(state = allProducts, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_ALLPRODUCTS:
-      return [...state, action.products]
+    case GOT_ALLPRODUCTS:
+      return action.products
 
     default:
       return state
