@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import addUserInfo from '../store/user'
 
-class Checkout extends React.Component {
+export class Checkout extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -76,7 +77,7 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  addCheckoutInfo: user => dispatch(addCheckoutInfo(user))
+  addCheckoutInfo: user => dispatch(addUserInfo(user))
 })
 
 export default connect(mapState, mapDispatch)(Checkout)
