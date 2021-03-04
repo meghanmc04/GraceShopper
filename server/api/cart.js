@@ -5,7 +5,6 @@ module.exports = router
 // GET /api/cart/:id
 router.get('/:id', async (req, res, next) => {
   try {
-    // update to eager load products!!!
     const currentCart = await Cart.findByPk(req.params.id, {
       include: Product
     })
@@ -15,6 +14,11 @@ router.get('/:id', async (req, res, next) => {
     next(err)
   }
 })
+
+// POST /api/cart/
+// Write route to create new cart
+// somehow this needs to be linked to a user.
+// First check to see if user has any active carts
 
 // PUT /api/cart/:id
 router.put('/:id', async (req, res, next) => {
@@ -41,6 +45,8 @@ router.put('/:id', async (req, res, next) => {
 })
 
 // PUT /api/cart/checkout/:id
+
+// Need to add functionality to deduct from the product "inventory" when someone purchases an item
 router.put('/checkout/:id', async (req, res, next) => {
   try {
     const currentCart = await Cart.findByPk(req.params.id)
