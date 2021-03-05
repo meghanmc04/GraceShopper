@@ -2,7 +2,7 @@ const router = require('express').Router()
 const {Cart, CartProducts, Product} = require('../db/models')
 module.exports = router
 
-// GET /api/cart/:id
+// GET /api/cart/:id  update use userId <-- rewrite route to search for cart based off of userId
 router.get('/:id', async (req, res, next) => {
   try {
     const currentCart = await Cart.findByPk(req.params.id, {
@@ -21,7 +21,7 @@ router.get('/:id', async (req, res, next) => {
 // First check to see if user has any active carts
 router.post('/', async (req, res, next) => {
   try {
-    const newCart = await Cart.create(req.body)
+    const newCart = await Cart.create(req.body) //userId
     console.log(newCart)
     res.send(newCart)
   } catch (error) {
@@ -30,24 +30,29 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-// PUT /api/cart/:id
+// PUT /api/cart/:cartId  <---- make more concise (less API calls/ use instanc method)
+// *** can possibly be turned into an instance method **
 // I feel like I can rewrite this to be more concise...
-router.put('/:id', async (req, res, next) => {
+router.put('/:cartId', async (req, res, next) => {
   try {
-    const currentCart = await Cart.findByPk(req.params.id, {include: Product})
-    if (await currentCart.containsProduct(Number(req.body.id))) {
+    const currentCart = await Cart.findByPk(req.params.cartId, {
+      include: Product
+    })
+    if (await currentCart.containsProduct(Number(req.body.productId))) {
       const productInCart = await CartProducts.findOne({
         where: {
           cartId: currentCart.id,
-          productId: req.body.id
+          productId: req.body.productId
         }
       })
       productInCart.quantity += 1
       await productInCart.save()
     } else {
-      await currentCart.addProduct(req.body.id)
+      await currentCart.addProduct(req.body.productId)
     }
-    const updatedCart = await Cart.findByPk(req.params.id, {include: Product})
+    const updatedCart = await Cart.findByPk(req.params.cartId, {
+      include: Product
+    })
     await updatedCart.save()
     res.send(updatedCart)
   } catch (error) {
@@ -56,12 +61,11 @@ router.put('/:id', async (req, res, next) => {
   }
 })
 
-// PUT /api/cart/checkout/:id
-
+// PUT /api/cart/checkout/:cartId
 // Need to add functionality to deduct from the product "inventory" when someone purchases an item
-router.put('/checkout/:id', async (req, res, next) => {
+router.put('/checkout/:cartId', async (req, res, next) => {
   try {
-    const currentCart = await Cart.findByPk(req.params.id)
+    const currentCart = await Cart.findByPk(req.params.cartId)
     currentCart.active = false
     await currentCart.save()
     res.send(currentCart)
@@ -72,27 +76,28 @@ router.put('/checkout/:id', async (req, res, next) => {
 })
 
 // Path to delete indiviual items? Should I make new routes for CartProducts or just include them all here?
-// PUT /api/cart/removeItem/:id
-router.put('/removeItem/:id', async (req, res, next) => {
+// PUT /api/cart/removeItem/:cartId <--- Remove repeating code (if you can figure out how... )
+// *** can possibly be turned into an instance method **
+router.put('/removeItem/:cartId', async (req, res, next) => {
   try {
-    const itemToRemove = await CartProducts.findByPk(req.body.id)
+    const itemToRemove = await CartProducts.findByPk(req.body.productId)
     if (!itemToRemove) {
       res.status(404).send('not found')
     } else if (itemToRemove.quantity > 1) {
       itemToRemove.quantity -= 1
       await itemToRemove.save()
-      const currentCart = await Cart.findByPk(req.params.id, {
+      const currentCart = await Cart.findByPk(req.params.cartId, {
         include: Product
       })
       await currentCart.save()
     } else {
       itemToRemove.destroy()
-      const currentCart = await Cart.findByPk(req.params.id, {
+      const currentCart = await Cart.findByPk(req.params.cartId, {
         include: Product
       })
       await currentCart.save()
     }
-    const currentCart = await Cart.findByPk(req.params.id, {
+    const currentCart = await Cart.findByPk(req.params.cartId, {
       include: Product
     })
     await currentCart.save()

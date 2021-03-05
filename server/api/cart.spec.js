@@ -8,7 +8,7 @@ const Cart = db.model('cart')
 const User = db.model('user')
 const Product = db.model('product')
 
-describe.only('Cart routes', () => {
+describe('Cart routes', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
@@ -38,7 +38,7 @@ describe.only('Cart routes', () => {
       expect(currentCart.userId).to.be.equal(newUser.id)
     })
 
-    it('can add one item to the car PUT /api/cart/:id', async () => {
+    it('can add one item to the cart PUT /api/cart/:id', async () => {
       const newProduct = await Product.create({
         size: 'small',
         color: 'red',
@@ -56,7 +56,7 @@ describe.only('Cart routes', () => {
       expect(res.body.products[0].id).to.be.equal(newProduct.id)
     })
 
-    it('can add different items to the car PUT /api/cart/:id', async () => {
+    it('can add different items to the cart PUT /api/cart/:id', async () => {
       const newProduct = await Product.create({
         size: 'small',
         color: 'red',
@@ -90,7 +90,7 @@ describe.only('Cart routes', () => {
       expect(res.body.products[1].id).to.be.equal(secondNewProduct.id)
     })
 
-    it('can add one item to the car PUT /api/cart/:id', async () => {
+    it('can add one item to the cart multiple times PUT /api/cart/:id', async () => {
       const newProduct = await Product.create({
         size: 'small',
         color: 'red',
