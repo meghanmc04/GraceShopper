@@ -27,6 +27,7 @@ class Cart extends React.Component {
   render() {
     console.log('PROPS', this.props)
     const products = this.props.cart.products
+    console.log('PRODUCTS', products)
     const cart = this.props.cart
     return (
       <div>
@@ -51,7 +52,7 @@ class Cart extends React.Component {
                 </button>
               </li>
             ))
-          : 'No products in cart'}
+          : 'Oh no! Your cart is empty. Time to go shopping!!'}
         <h3>Subtotal: {this.props.cart.subTotal}</h3>
       </div>
     )
