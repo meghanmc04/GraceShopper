@@ -42,8 +42,9 @@ router.get('/me', (req, res) => {
   res.json(req.user)
 })
 
-router.put('/me', async (req, res, next) => {
+router.patch('/me', async (req, res, next) => {
   try {
+    console.log('express auth/me', req)
     await User.update(
       {
         name: req.body.name,
@@ -51,9 +52,17 @@ router.put('/me', async (req, res, next) => {
         phone: req.body.phone
       },
       {
-        where: req.user.id
+        where: {
+          id: req.body.id
+        }
       }
     )
+    const user = await User.findOne({
+      where: {
+        id: req.body.id
+      }
+    })
+    res.json(user)
   } catch (error) {
     next(error)
   }

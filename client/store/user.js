@@ -25,6 +25,7 @@ const updateUserInfo = user => ({type: UPDATE_USER_INFO, user})
  */
 export const me = () => async dispatch => {
   try {
+    console.log('thunk me test')
     const res = await axios.get('/auth/me')
     dispatch(getUser(res.data || defaultUser))
   } catch (err) {
@@ -58,10 +59,12 @@ export const logout = () => async dispatch => {
   }
 }
 
-export const addUserInfo = (userId, user) => {
+export const addUserInfo = info => {
   return async dispatch => {
     try {
-      const {data: updatedUser} = await axios.put(`/auth/me`, user)
+      console.log('user info thunk, info', info)
+      const {data: updatedUser} = await axios.patch(`/auth/me`, info)
+      console.log('user info thunk,', updatedUser)
       dispatch(updateUserInfo(updatedUser))
     } catch (error) {
       console.error(error)

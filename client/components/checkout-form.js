@@ -1,13 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import addUserInfo from '../store/user'
-import {auth} from '../store'
 
 export class Checkout extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      userId: undefined,
+      id: this.props.user.id,
       name: '',
       address: '',
       phone: ''
@@ -15,9 +14,8 @@ export class Checkout extends React.Component {
     this.changeName = this.changeName.bind(this)
     this.changeAddress = this.changeAddress.bind(this)
     this.changePhone = this.changePhone.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
-  componentDidMount() {}
-
   changeName(evt) {
     this.setState({name: evt.target.value})
   }
@@ -29,12 +27,14 @@ export class Checkout extends React.Component {
   }
   handleSubmit(evt) {
     evt.preventDefault()
-    this.props.addCheckoutInfo(this.state)
+    addUserInfo(this.state)
+    console.log(this.state)
+    console.log('submitted')
   }
 
   render() {
-    console.log('props checkout-form', this.props)
-    console.log('state checkout-form', this.state)
+    console.log('check-THIS-out', this)
+    console.log('this.id', this.state.id)
     return (
       <div>
         <h1>Checkout</h1>
@@ -77,13 +77,11 @@ export class Checkout extends React.Component {
 }
 
 const mapState = state => ({
-  name: state.name,
-  address: state.address,
-  phone: state.phone
+  user: state.user
 })
 
 const mapDispatch = dispatch => ({
-  addCheckoutInfo: user => dispatch(addUserInfo(user))
+  addNewInfo: userInfo => dispatch(addUserInfo(userInfo))
 })
 
 export default connect(mapState, mapDispatch)(Checkout)
