@@ -33,8 +33,8 @@ class Routes extends Component {
             </Route>
           </Switch>
         )}
-        {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
+        {/* Displays our AllProducts component as a fallback */}
+        <Route component={AllProducts} />
       </Switch>
     )
   }
