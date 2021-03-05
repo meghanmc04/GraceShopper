@@ -25,7 +25,7 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/checkout">
-          <Checkout user={this.props.user} />
+          <Checkout userInfo={this.props} />
         </Route>
         {isLoggedIn && (
           <Switch>

@@ -7,7 +7,7 @@ export class Checkout extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      id: this.props.user.id,
+      id: '',
       name: '',
       address: '',
       phone: '',
@@ -40,14 +40,19 @@ export class Checkout extends React.Component {
   }
 
   render() {
-    console.log('check-THIS-out', this)
-    console.log('this.id', this.state.id)
+    const user = this.props.userInfo.user
+    const isLoggedIn = this.props.userInfo.isLoggedIn
+
+    console.log('checkout user', user)
+    console.log('checkout isLoggedIn', isLoggedIn)
     return (
       <div>
         <h1>Checkout</h1>
-        <p>
-          <i>have an account?</i> <Link to="/login">Login</Link>
-        </p>
+        {!isLoggedIn ? (
+          <p>
+            <i>have an account?</i> <Link to="/login">Login</Link>
+          </p>
+        ) : null}
         <h3>Shipping Info</h3>
         <form name="checkoutShipping" onSubmit={this.handleSubmit}>
           <div>
@@ -83,7 +88,7 @@ export class Checkout extends React.Component {
                 name="phone"
                 type="text"
                 onChange={this.addEmail}
-                require={true}
+                required={true}
                 placeholder="Email"
               />
             </label>
