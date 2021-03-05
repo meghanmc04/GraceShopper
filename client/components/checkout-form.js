@@ -7,7 +7,7 @@ export class Checkout extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      id: '',
+      id: this.props.userInfo.user.id,
       name: '',
       address: '',
       phone: '',
@@ -34,9 +34,7 @@ export class Checkout extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
-    // addUserInfo(this.state)
-    console.log(this.state)
-    console.log('submitted')
+    // isLoggedIn ?     : console.log('order submitted!')
   }
 
   render() {
