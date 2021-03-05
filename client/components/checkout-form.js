@@ -10,22 +10,28 @@ export class Checkout extends React.Component {
       id: this.props.user.id,
       name: '',
       address: '',
-      phone: ''
+      phone: '',
+      email: ''
     }
-    this.changeName = this.changeName.bind(this)
-    this.changeAddress = this.changeAddress.bind(this)
-    this.changePhone = this.changePhone.bind(this)
+    this.addName = this.addName.bind(this)
+    this.addAddress = this.addAddress.bind(this)
+    this.addPhone = this.addPhone.bind(this)
+    this.addEmail = this.addEmail.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-  changeName(evt) {
+  addName(evt) {
     this.setState({name: evt.target.value})
   }
-  changeAddress(evt) {
+  addAddress(evt) {
     this.setState({address: evt.target.value})
   }
-  changePhone(evt) {
+  addPhone(evt) {
     this.setState({phone: evt.target.value})
   }
+  addEmail(evt) {
+    this.setState({email: evt.target.value})
+  }
+
   handleSubmit(evt) {
     evt.preventDefault()
     // addUserInfo(this.state)
@@ -50,7 +56,7 @@ export class Checkout extends React.Component {
                 name="name"
                 type="text"
                 required={true}
-                onChange={this.changeName}
+                onChange={this.addName}
                 placeholder="Full Name"
               />
             </label>
@@ -58,7 +64,7 @@ export class Checkout extends React.Component {
               <input
                 name="address"
                 type="text"
-                onChange={this.changeAddress}
+                onChange={this.addAddress}
                 required={true}
                 placeholder="Street Address"
               />
@@ -67,7 +73,7 @@ export class Checkout extends React.Component {
               <input
                 name="phone"
                 type="text"
-                onChange={this.changePhone}
+                onChange={this.addPhone}
                 required={true}
                 placeholder="Phone Number"
               />
@@ -76,7 +82,7 @@ export class Checkout extends React.Component {
               <input
                 name="phone"
                 type="text"
-                onChange={this.changeEmail}
+                onChange={this.addEmail}
                 require={true}
                 placeholder="Email"
               />
