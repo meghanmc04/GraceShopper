@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import addUserInfo from '../store/user'
+// import addUserInfo from '../store/user'
 
 export class Checkout extends React.Component {
   constructor(props) {

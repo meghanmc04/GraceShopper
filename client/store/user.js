@@ -6,7 +6,7 @@ import history from '../history'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
-const UPDATE_USER_INFO = 'UPDATE_USER_INFO'
+// const UPDATE_USER_INFO = 'UPDATE_USER_INFO'
 
 /**
  * INITIAL STATE
@@ -18,7 +18,7 @@ const defaultUser = {}
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
-const updateUserInfo = user => ({type: UPDATE_USER_INFO, user})
+// const updateUserInfo = user => ({type: UPDATE_USER_INFO, user})
 
 /**
  * THUNK CREATORS
@@ -59,18 +59,18 @@ export const logout = () => async dispatch => {
   }
 }
 
-export const addUserInfo = info => {
-  return async dispatch => {
-    try {
-      console.log('user info thunk, info', info)
-      const {data: updatedUser} = await axios.patch(`/auth/me`, info)
-      console.log('user info thunk,', updatedUser)
-      dispatch(updateUserInfo(updatedUser))
-    } catch (error) {
-      console.error(error)
-    }
-  }
-}
+// export const addUserInfo = info => {
+//   return async dispatch => {
+//     try {
+//       console.log('user info thunk, info', info)
+//       const {data: updatedUser} = await axios.patch(`/auth/me`, info)
+//       console.log('user info thunk,', updatedUser)
+//       dispatch(updateUserInfo(updatedUser))
+//     } catch (error) {
+//       console.error(error)
+//     }
+//   }
+// }
 
 /**
  * REDUCER
@@ -81,13 +81,13 @@ export default function(state = defaultUser, action) {
       return action.user
     case REMOVE_USER:
       return defaultUser
-    case UPDATE_USER_INFO:
-      return {
-        ...state,
-        name: action.user.name,
-        address: action.user.address,
-        phone: action.user.phone
-      }
+    // case UPDATE_USER_INFO:
+    //   return {
+    //     ...state,
+    //     name: action.user.name,
+    //     address: action.user.address,
+    //     phone: action.user.phone
+    //   }
     default:
       return state
   }
