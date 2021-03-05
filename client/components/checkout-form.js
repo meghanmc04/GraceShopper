@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 // import addUserInfo from '../store/user'
 
 export class Checkout extends React.Component {
@@ -27,7 +28,7 @@ export class Checkout extends React.Component {
   }
   handleSubmit(evt) {
     evt.preventDefault()
-    addUserInfo(this.state)
+    // addUserInfo(this.state)
     console.log(this.state)
     console.log('submitted')
   }
@@ -38,6 +39,9 @@ export class Checkout extends React.Component {
     return (
       <div>
         <h1>Checkout</h1>
+        <p>
+          <i>have an account?</i> <Link to="/login">Login</Link>
+        </p>
         <h3>Shipping Info</h3>
         <form name="checkoutShipping" onSubmit={this.handleSubmit}>
           <div>
@@ -66,6 +70,15 @@ export class Checkout extends React.Component {
                 onChange={this.changePhone}
                 required={true}
                 placeholder="Phone Number"
+              />
+            </label>
+            <label htmlFor="email">
+              <input
+                name="phone"
+                type="text"
+                onChange={this.changeEmail}
+                require={true}
+                placeholder="Email"
               />
             </label>
             <button type="submit">Submit</button>
