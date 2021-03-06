@@ -41,11 +41,8 @@ form div {
   width: 75px;
 }
 
-li {
-  list-style: none;
-}
-
 .cart-list-item {
+  list-style: none;
   padding: 15px;
   border: 1px black solid;
   display: flex;
