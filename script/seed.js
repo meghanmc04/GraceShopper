@@ -19,7 +19,7 @@ async function seed() {
       color: 'red',
       cut: 'skinny',
       price: 20.0,
-      quantity: 10
+      inventory: 10
     },
     {
       imageUrl: '/blue-lightwash-skinny.jpg',
@@ -27,7 +27,7 @@ async function seed() {
       color: 'blue light wash',
       cut: 'skinny',
       price: 30.0,
-      quantity: 10
+      inventory: 10
     },
     {
       imageUrl: '/blue-darkwash-ripped.webp',
@@ -35,7 +35,7 @@ async function seed() {
       color: 'blue dark wash',
       cut: 'ripped',
       price: 30.0,
-      quantity: 10
+      inventory: 10
     },
     {
       imageUrl: '/floral-skinny.jpg',
@@ -43,7 +43,7 @@ async function seed() {
       color: 'floral',
       cut: 'skinny',
       price: 30.0,
-      quantity: 10
+      inventory: 10
     },
     {
       imageUrl: '/pink-skinny.webp',
@@ -51,7 +51,7 @@ async function seed() {
       color: 'pink',
       cut: 'skinny',
       price: 30.0,
-      quantity: 10
+      inventory: 10
     },
     {
       imageUrl: '/black-bootcut.webp',
@@ -59,7 +59,7 @@ async function seed() {
       color: 'black',
       cut: 'bootcut',
       price: 30.0,
-      quantity: 10
+      inventory: 10
     }
   ]
 
