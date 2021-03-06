@@ -42,30 +42,4 @@ router.get('/me', (req, res) => {
   res.json(req.user)
 })
 
-// router.patch('/me', async (req, res, next) => {
-//   try {
-//     console.log('express auth/me', req)
-//     await User.update(
-//       {
-//         name: req.body.name,
-//         delivery: req.body.address,
-//         phone: req.body.phone
-//       },
-//       {
-//         where: {
-//           id: req.body.id
-//         }
-//       }
-//     )
-//     const user = await User.findOne({
-//       where: {
-//         id: req.body.id
-//       }
-//     })
-//     res.json(user)
-//   } catch (error) {
-//     next(error)
-//   }
-// })
-
 router.use('/google', require('./google'))

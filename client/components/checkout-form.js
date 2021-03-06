@@ -1,13 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-// import addUserInfo from '../store/user'
+import {sendUserInfo} from '../store/user'
 
 export class Checkout extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      id: this.props.userInfo.user.id,
       name: '',
       address: '',
       phone: '',
@@ -34,15 +33,15 @@ export class Checkout extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
-    // isLoggedIn ?     : console.log('order submitted!')
+    this.props.isLoggedIn
+      ? this.props.sendUserInfo(this.props.user.id, this.state)
+      : console.log('order submitted!')
+    console.log('this.state', this.state)
   }
 
   render() {
-    const user = this.props.userInfo.user
-    const isLoggedIn = this.props.userInfo.isLoggedIn
-
-    console.log('checkout user', user)
-    console.log('checkout isLoggedIn', isLoggedIn)
+    const isLoggedIn = this.props.isLoggedIn
+    console.log('checkout props', this.props)
     return (
       <div>
         <h1>Checkout</h1>
@@ -69,7 +68,7 @@ export class Checkout extends React.Component {
                 type="text"
                 onChange={this.addAddress}
                 required={true}
-                placeholder="Street Address"
+                placeholder="Shipping Address"
               />
             </label>
             <label htmlFor="phone">
@@ -81,15 +80,18 @@ export class Checkout extends React.Component {
                 placeholder="Phone Number"
               />
             </label>
-            <label htmlFor="email">
-              <input
-                name="phone"
-                type="text"
-                onChange={this.addEmail}
-                required={true}
-                placeholder="Email"
-              />
-            </label>
+
+            {!isLoggedIn ? (
+              <label htmlFor="email">
+                <input
+                  name="phone"
+                  type="text"
+                  onChange={this.addEmail}
+                  required={true}
+                  placeholder="Email"
+                />
+              </label>
+            ) : null}
             <button type="submit">Submit</button>
           </div>
         </form>
@@ -99,11 +101,13 @@ export class Checkout extends React.Component {
 }
 
 const mapState = state => ({
-  user: state.user
+  user: state.user,
+  isLoggedIn: !!state.user.id
 })
 
 const mapDispatch = dispatch => ({
-  addNewInfo: userInfo => dispatch(addUserInfo(userInfo))
+  sendUserInfo: (userId, info) => dispatch(sendUserInfo(userId, info))
 })
 
+//will need to add connection to store
 export default connect(mapState, mapDispatch)(Checkout)
