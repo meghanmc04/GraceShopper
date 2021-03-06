@@ -36,12 +36,10 @@ export class Checkout extends React.Component {
     this.props.isLoggedIn
       ? this.props.sendUserInfo(this.props.user.id, this.state)
       : console.log('order submitted!')
-    console.log('this.state', this.state)
   }
 
   render() {
     const isLoggedIn = this.props.isLoggedIn
-    console.log('checkout props', this.props)
     return (
       <div>
         <h1>Checkout</h1>
@@ -109,5 +107,4 @@ const mapDispatch = dispatch => ({
   sendUserInfo: (userId, info) => dispatch(sendUserInfo(userId, info))
 })
 
-//will need to add connection to store
 export default connect(mapState, mapDispatch)(Checkout)
