@@ -4,10 +4,12 @@ const db = require('../db')
 const Product = db.define('product', {
   size: {
     type: Sequelize.ENUM,
-    values: ['small', 'medium', 'large']
+    values: ['small', 'medium', 'large'],
+    allowNull: false
   },
   color: {
     type: Sequelize.ENUM,
+    allowNull: false,
     values: [
       'red',
       'green',
@@ -22,13 +24,22 @@ const Product = db.define('product', {
   },
   cut: {
     type: Sequelize.ENUM,
+    allowNull: false,
     values: ['skinny', 'bootcut', 'straight', 'highrise', 'flare', 'ripped']
   },
   price: {
-    type: Sequelize.DECIMAL(10, 2)
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    validate: {
+      min: 0
+    }
   },
-  quantity: {
-    type: Sequelize.INTEGER
+  inventory: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    validate: {
+      min: 0
+    }
   },
   imageUrl: {
     type: Sequelize.TEXT,

@@ -4,7 +4,10 @@ const db = require('../db')
 const CartProducts = db.define('cartProducts', {
   quantity: {
     type: Sequelize.INTEGER,
-    defaultValue: 1
+    defaultValue: 1,
+    validate: {
+      min: 1
+    }
   }
 })
 
