@@ -4,7 +4,7 @@ const {CartProducts} = require('./cartProducts')
 
 const Cart = db.define('cart', {
   subTotal: {
-    type: Sequelize.DECIMAL(10, 2),
+    type: Sequelize.DECIMAL(10, 2), // update
     defaultValue: 0
   },
   active: {
@@ -23,6 +23,11 @@ Cart.beforeSave(async cart => {
   return cart
 })
 
+// second hook
+// beforeBulkCreate ??
+
+// optimize route to incorporate findOrCreate ??
+// use findOrCreate instead of magic methods
 Cart.prototype.containsProduct = async function(productId) {
   let answer = false
   const productsInCart = await this.getProducts()
@@ -34,15 +39,6 @@ Cart.prototype.containsProduct = async function(productId) {
   return answer
 }
 
-// Cart.prototype.calculateSubTotal = async function () {
-//   const items = await this.getProducts()
-//   let total = 0.0
-//   items.forEach((item) => {
-//     console.log(parseFloat(item.price).toFixed(2))
-//     total += Number(item.price)
-//   })
-//   this.subTotal = total
-//   return this
-// }
+// instance methods (adding and removing)
 
 module.exports = Cart
