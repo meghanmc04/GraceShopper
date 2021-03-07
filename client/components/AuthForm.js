@@ -37,7 +37,6 @@ const useStyles = makeStyles(theme => ({
 const AuthForm = props => {
   const classes = useStyles()
   const {handleSubmit, error, displayName, name} = props
-  const isLoggedIn = props.isLoggedIn
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
