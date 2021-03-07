@@ -11,7 +11,7 @@ async function seed() {
     User.create({name: 'Cody', email: 'cody@email.com', password: '123'}),
     User.create({name: 'murphy', email: 'murphy@email.com', password: '123'})
   ])
-  console.log('created users', users)
+  console.log(`created ${users.length} users`)
   const products = [
     {
       imageUrl: '/red-skinny.jpg',
@@ -65,7 +65,7 @@ async function seed() {
 
   const createdProducts = await Product.bulkCreate(products, {returning: true})
 
-  console.log('created products', createdProducts)
+  console.log(`created ${createdProducts.length} products`)
   //hook for adding together $
   const carts = [
     {
@@ -79,12 +79,10 @@ async function seed() {
   const createdCarts = await Cart.bulkCreate(carts, {returning: true})
   await createdCarts[0].addProduct(createdProducts[0])
   await createdCarts[0].addProduct(createdProducts[1])
-  await createdCarts[0].addProduct(createdProducts[1])
   await createdCarts[0].addProduct(createdProducts[2])
 
-  console.log('created carts', createdCarts)
+  console.log(`created ${createdCarts.length} carts`)
 
-  console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
 }
 
