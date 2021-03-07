@@ -79,12 +79,10 @@ async function seed() {
   const createdCarts = await Cart.bulkCreate(carts, {returning: true})
   await createdCarts[0].addProduct(createdProducts[0])
   await createdCarts[0].addProduct(createdProducts[1])
-  await createdCarts[0].addProduct(createdProducts[1])
   await createdCarts[0].addProduct(createdProducts[2])
 
   console.log(`created ${createdCarts.length} carts`)
 
-  console.log(`seeded ${users.length} users`) // Delete this then?
   console.log(`seeded successfully`)
 }
 
