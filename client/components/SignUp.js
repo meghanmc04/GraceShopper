@@ -13,18 +13,8 @@ import Typography from '@material-ui/core/Typography'
 import {makeStyles} from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  )
-}
+import {auth} from '../store'
+import {connect} from 'react-redux'
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -46,8 +36,9 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function SignUp() {
+const SignUpForm = props => {
   const classes = useStyles()
+  const {handleSubmit, error} = props
 
   return (
     <Container component="main" maxWidth="xs">
@@ -59,29 +50,24 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form
+          name="signup"
+          onSubmit={handleSubmit}
+          className={classes.form}
+          noValidate
+        >
+          {error && error.response && <div> {error.response.data} </div>}
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
-                autoComplete="fname"
-                name="firstName"
+                autoComplete="name"
+                name="name"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
+                id="name"
+                label="Full Name"
                 autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
               />
             </Grid>
             <Grid item xs={12}>
@@ -132,9 +118,28 @@ export default function SignUp() {
           </Grid>
         </form>
       </div>
-      <Box mt={5}>
-        <Copyright />
-      </Box>
+      <Box mt={5} />
     </Container>
   )
 }
+
+const mapState = state => {
+  return {
+    error: state.user.error
+  }
+}
+
+const mapDispatch = dispatch => {
+  return {
+    handleSubmit(evt) {
+      evt.preventDefault()
+      const formName = evt.target.name
+      const email = evt.target.email.value
+      const password = evt.target.password.value
+      dispatch(auth(email, password, formName))
+      evt.target.reset()
+    }
+  }
+}
+
+export const SignUp = connect(mapState, mapDispatch)(SignUpForm)
