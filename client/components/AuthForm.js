@@ -3,8 +3,6 @@ import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import TextField from '@material-ui/core/TextField'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Checkbox from '@material-ui/core/Checkbox'
 import Link from '@material-ui/core/Link'
 import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
@@ -36,9 +34,9 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const SignUpForm = props => {
+const AuthForm = props => {
   const classes = useStyles()
-  const {handleSubmit, error} = props
+  const {handleSubmit, error, displayName, name} = props
 
   return (
     <Container component="main" maxWidth="xs">
@@ -51,25 +49,14 @@ const SignUpForm = props => {
           Sign up
         </Typography>
         <form
-          name="signup"
+          name={name}
           onSubmit={handleSubmit}
           className={classes.form}
           noValidate
         >
           {error && error.response && <div> {error.response.data} </div>}
+
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="name"
-                name="name"
-                variant="outlined"
-                required
-                fullWidth
-                id="name"
-                label="Full Name"
-                autoFocus
-              />
-            </Grid>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -93,12 +80,6 @@ const SignUpForm = props => {
                 autoComplete="current-password"
               />
             </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
-            </Grid>
           </Grid>
           <Button
             type="submit"
@@ -107,9 +88,9 @@ const SignUpForm = props => {
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+            {displayName}
           </Button>
-          <Grid container justify="flex-end">
+          <Grid container justify="center">
             <Grid item>
               <Link href="#" variant="body2">
                 Already have an account? Sign in
@@ -123,8 +104,18 @@ const SignUpForm = props => {
   )
 }
 
-const mapState = state => {
+const mapLogin = state => {
   return {
+    name: 'login',
+    displayName: 'Login',
+    error: state.user.error
+  }
+}
+
+const mapSignup = state => {
+  return {
+    name: 'signup',
+    displayName: 'Sign Up',
     error: state.user.error
   }
 }
@@ -142,4 +133,5 @@ const mapDispatch = dispatch => {
   }
 }
 
-export const SignUp = connect(mapState, mapDispatch)(SignUpForm)
+export const LogIn = connect(mapLogin, mapDispatch)(AuthForm)
+export const SignUp = connect(mapSignup, mapDispatch)(AuthForm)
