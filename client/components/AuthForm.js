@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
 const AuthForm = props => {
   const classes = useStyles()
   const {handleSubmit, error, displayName, name} = props
-
+  const isLoggedIn = props.isLoggedIn
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -90,14 +90,18 @@ const AuthForm = props => {
           >
             {displayName}
           </Button>
-          <Grid container justify="center">
-            <Grid item>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
-              </Link>
+
+          {displayName === 'Sign Up' ? (
+            <Grid container justify="center">
+              <Grid item>
+                <Link href="/login" variant="body2">
+                  Already have an account? Sign in
+                </Link>
+              </Grid>
             </Grid>
-          </Grid>
+          ) : null}
         </form>
+        <a href="/auth/google">{displayName} with Google</a>
       </div>
       <Box mt={5} />
     </Container>
@@ -108,7 +112,8 @@ const mapLogin = state => {
   return {
     name: 'login',
     displayName: 'Login',
-    error: state.user.error
+    error: state.user.error,
+    isLoggedIn: !!state.user.id
   }
 }
 
@@ -116,7 +121,8 @@ const mapSignup = state => {
   return {
     name: 'signup',
     displayName: 'Sign Up',
-    error: state.user.error
+    error: state.user.error,
+    isLoggedIn: !!state.user.id
   }
 }
 
