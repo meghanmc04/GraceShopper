@@ -34,26 +34,48 @@ class Cart extends React.Component {
         <h1>Cart Contents: </h1>
         {products
           ? products.map(product => (
-              <li key={product.id}>
-                {product.cut} {product.color} {product.size} <b>Price: </b>
-                {product.price} <b>Quantity in Cart: </b>
-                {product.cartProducts.quantity}
-                <button
-                  type="button"
-                  onClick={() => this.addAnotherToCart(cart.id, product.id)}
-                >
-                  +
-                </button>
-                <button
-                  type="button"
-                  onClick={() => this.removeOneFromCart(cart.id, product.id)}
-                >
-                  -
-                </button>
+              <li key={product.id} className="cart-list-item">
+                <img
+                  className="cart-product-image"
+                  src={product.imageUrl}
+                  alt={(product.cut, product.color)}
+                />
+                <div className="product-in-cart-description">
+                  <div>Cut: {product.cut}</div>
+                  <div>Color: {product.color}</div>
+                  <div>Size: {product.size}</div>
+                  <b>Item Price: </b> ${product.price}
+                </div>
+                <div className="cart-button">
+                  <button
+                    type="button"
+                    onClick={() => this.addAnotherToCart(cart.id, product.id)}
+                  >
+                    +
+                  </button>
+                  <p> I want more! </p>
+                </div>
+                <div className="cart-product-quantity">
+                  <b>I'm getting: </b>
+                  <p>{product.cartProducts.quantity}</p>
+                </div>
+                <div className="cart-button">
+                  <button
+                    type="button"
+                    onClick={() => this.removeOneFromCart(cart.id, product.id)}
+                  >
+                    -
+                  </button>
+                  <p> Next time... </p>
+                </div>
+                <div className="cart-product-total-price">
+                  <b>Total Price: </b>
+                  <p>${product.price * product.cartProducts.quantity}.00</p>
+                </div>
               </li>
             ))
           : 'Oh no! Your cart is empty. Time to go shopping!!'}
-        <h3>Subtotal: {this.props.cart.subTotal}</h3>
+        <h3>Subtotal: ${this.props.cart.subTotal}</h3>
       </div>
     )
   }
