@@ -44,15 +44,16 @@ export const NavBar = ({isLoggedIn, handleLogout}) => {
       <AppBar position="static">
         <Toolbar>
           {/* menu icon (currently no functionality) */}
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
-
+          <Link to="/home" style={{color: 'white'}}>
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="menu"
+            >
+              <MenuIcon />
+            </IconButton>
+          </Link>
           {/* site name */}
           <Typography variant="h6" className={classes.title}>
             Graceful Jeans
