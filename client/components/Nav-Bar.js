@@ -39,12 +39,11 @@ export const NavBar = ({isLoggedIn, handleLogout}) => {
     setAnchorEl(null)
   }
 
-  const navToLogin = () => {}
-
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
+          {/* menu icon (currently no functionality) */}
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -53,12 +52,16 @@ export const NavBar = ({isLoggedIn, handleLogout}) => {
           >
             <MenuIcon />
           </IconButton>
+
+          {/* site name */}
           <Typography variant="h6" className={classes.title}>
             Graceful Jeans
           </Typography>
 
+          {/* if user is logged in, render account button, else render login button  */}
           {isLoggedIn ? (
             <div>
+              {/* user account button (with drop down menu) */}
               <IconButton
                 aria-label="account of current user"
                 aria-controls="simple-menu"
@@ -68,6 +71,7 @@ export const NavBar = ({isLoggedIn, handleLogout}) => {
               >
                 <Mood />
               </IconButton>
+              {/* drop down menu functionality */}
               <Menu
                 id="simple-menu"
                 anchorEl={anchorEl}
@@ -76,11 +80,14 @@ export const NavBar = ({isLoggedIn, handleLogout}) => {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>My Account</MenuItem>
-                <MenuItem onClick={handleClose}>Order History</MenuItem>
+                <MenuItem component={Link} to="/orderhistory">
+                  Order History
+                </MenuItem>
                 <MenuItem onClick={handleLogout}>Log Out</MenuItem>
               </Menu>
             </div>
           ) : (
+            // login button
             <Link to="/login">
               <Button color="primary" variant="contained" disableElevation>
                 Login
@@ -89,11 +96,12 @@ export const NavBar = ({isLoggedIn, handleLogout}) => {
           )}
 
           <div>
+            {/* cart button */}
             <Link to="/cart" style={{color: 'white'}}>
               <IconButton
-                // aria-label="cart of current user"
-                // aria-controls="menu-appbar"
-                // aria-haspopup="true"
+                aria-label="cart of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
                 color="inherit"
                 variant="contained"
               >
