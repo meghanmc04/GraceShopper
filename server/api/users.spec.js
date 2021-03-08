@@ -29,4 +29,25 @@ describe('User routes', () => {
       expect(res.body[0].email).to.be.equal(codysEmail)
     })
   }) // end describe('/api/users')
+
+  describe('/api/users/:userId', () => {
+    const codysEmail = 'cody@puppybook.com'
+    beforeEach(() => {
+      return User.create({
+        email: codysEmail
+      })
+    })
+    it('PUT /api/users/:userId', async () => {
+      const newName = 'ANTI-Cody'
+      const res = await request(app)
+        .put('/api/users/1')
+        .send({
+          name: newName
+        })
+        .expect(200)
+      expect(res.body).to.be.an('object')
+      console.log(res.body)
+      expect(res.body.name).to.be.equal('ANTI-Cody')
+    })
+  })
 }) // end describe('User routes')
