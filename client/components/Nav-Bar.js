@@ -29,9 +29,17 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-// eslint-disable-next-line react/display-name
 export const NavBar = () => {
   const classes = useStyles()
+  const [anchorEl, setAnchorEl] = React.useState(null)
+
+  const handleClick = evt => {
+    setAnchorEl(evt.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
 
   return (
     <div className={classes.root}>
@@ -52,19 +60,30 @@ export const NavBar = () => {
           <div>
             <IconButton
               aria-label="account of current user"
-              aria-controls="menu-appbar"
+              aria-controls="simple-menu"
               aria-haspopup="true"
-              onClick={console.log('clicked!')}
+              onClick={handleClick}
               color="inherit"
             >
               <Mood />
             </IconButton>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>Order History</MenuItem>
+              <MenuItem onClick={handleClose}>My Account</MenuItem>
+              <MenuItem onClick={handleClose}>Log Out</MenuItem>
+            </Menu>
 
             <IconButton
               aria-label="cart of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={console.log('cart clikced!')}
+              // onClick={console.log('cart clikced!')}
               color="inherit"
             >
               <ShoppingCart />
