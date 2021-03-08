@@ -12,6 +12,10 @@ import FormGroup from '@material-ui/core/FormGroup'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
 
+import {logout} from '../store'
+import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
@@ -25,7 +29,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 // eslint-disable-next-line react/display-name
-export default (NavBar = () => {
+export const NavBar = () => {
   const classes = useStyles()
 
   return (
@@ -46,7 +50,7 @@ export default (NavBar = () => {
 
           <div>
             <IconButton
-              aria-label="accdount of current user"
+              aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={console.log('clicked!')}
@@ -59,4 +63,14 @@ export default (NavBar = () => {
       </AppBar>
     </div>
   )
+}
+
+const mapState = state => ({
+  isLoggedIn: !!state.user.id
 })
+
+const mapDispatch = dispatch => ({
+  handleClick: () => dispatch(logout())
+})
+
+export default connect(mapState, mapDispatch)(NavBar)
