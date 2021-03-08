@@ -6,12 +6,10 @@ import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import Mood from '@material-ui/icons/Mood'
-import Switch from '@material-ui/core/Switch'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormGroup from '@material-ui/core/FormGroup'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
 import ShoppingCart from '@material-ui/icons/ShoppingCartOutlined'
+import Button from '@material-ui/core/Button'
 
 import {logout} from '../store'
 import {connect} from 'react-redux'
@@ -29,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export const NavBar = () => {
+export const NavBar = ({isLoggedIn}) => {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = React.useState(null)
 
@@ -40,6 +38,8 @@ export const NavBar = () => {
   const handleClose = () => {
     setAnchorEl(null)
   }
+
+  const navToLogin = () => {}
 
   return (
     <div className={classes.root}>
@@ -57,28 +57,38 @@ export const NavBar = () => {
             Graceful Jeans
           </Typography>
 
-          <div>
-            <IconButton
-              aria-label="account of current user"
-              aria-controls="simple-menu"
-              aria-haspopup="true"
-              onClick={handleClick}
-              color="inherit"
-            >
-              <Mood />
-            </IconButton>
-            <Menu
-              id="simple-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}>Order History</MenuItem>
-              <MenuItem onClick={handleClose}>My Account</MenuItem>
-              <MenuItem onClick={handleClose}>Log Out</MenuItem>
-            </Menu>
+          {isLoggedIn ? (
+            <div>
+              <IconButton
+                aria-label="account of current user"
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                onClick={handleClick}
+                color="inherit"
+              >
+                <Mood />
+              </IconButton>
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>My Account</MenuItem>
+                <MenuItem onClick={handleClose}>Order History</MenuItem>
+                <MenuItem onClick={logout}>Log Out</MenuItem>
+              </Menu>
+            </div>
+          ) : (
+            <Link to="/login">
+              <Button color="primary" variant="contained" disableElevation>
+                Login
+              </Button>
+            </Link>
+          )}
 
+          <div>
             <IconButton
               aria-label="cart of current user"
               aria-controls="menu-appbar"
@@ -100,7 +110,7 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  handleClick: () => dispatch(logout())
+  logout: () => dispatch(logout())
 })
 
 export default connect(mapState, mapDispatch)(NavBar)
