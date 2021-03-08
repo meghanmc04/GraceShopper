@@ -1916,22 +1916,22 @@ var logout = function logout() {
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/auth/logout');
 
               case 3:
-                dispatch(removeUser());
-                _history__WEBPACK_IMPORTED_MODULE_1__["default"].push('/login');
-                _context3.next = 10;
+                dispatch(removeUser()); // history.push('/login')
+
+                _context3.next = 9;
                 break;
 
-              case 7:
-                _context3.prev = 7;
+              case 6:
+                _context3.prev = 6;
                 _context3.t0 = _context3["catch"](0);
                 console.error(_context3.t0);
 
-              case 10:
+              case 9:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[0, 7]]);
+        }, _callee3, null, [[0, 6]]);
       }));
 
       return function (_x3) {
