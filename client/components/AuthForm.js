@@ -39,7 +39,6 @@ const AuthForm = props => {
   const {handleSubmit, error, displayName, name} = props
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -89,18 +88,21 @@ const AuthForm = props => {
           >
             {displayName}
           </Button>
-
-          {displayName === 'Sign Up' ? (
-            <Grid container justify="center">
-              <Grid item>
+          <a href="/auth/google">{displayName} with Google</a>
+          <Grid container justify="center">
+            <Grid item>
+              {displayName === 'Sign Up' ? (
                 <Link href="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
-              </Grid>
+              ) : (
+                <Link href="/signup" variant="body2">
+                  Don't have an account? Sign up
+                </Link>
+              )}
             </Grid>
-          ) : null}
+          </Grid>
         </form>
-        <a href="/auth/google">{displayName} with Google</a>
       </div>
       <Box mt={5} />
     </Container>
