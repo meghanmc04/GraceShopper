@@ -1950,22 +1950,22 @@ var logout = function logout() {
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/auth/logout');
 
               case 3:
-                dispatch(removeUser()); // history.push('/login')
-
-                _context3.next = 9;
+                dispatch(removeUser());
+                _history__WEBPACK_IMPORTED_MODULE_1__["default"].push('/home');
+                _context3.next = 10;
                 break;
 
-              case 6:
-                _context3.prev = 6;
+              case 7:
+                _context3.prev = 7;
                 _context3.t0 = _context3["catch"](0);
                 console.error(_context3.t0);
 
-              case 9:
+              case 10:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[0, 6]]);
+        }, _callee3, null, [[0, 7]]);
       }));
 
       return function (_x3) {
