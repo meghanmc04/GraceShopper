@@ -980,7 +980,7 @@ var mapDispatch = function mapDispatch(dispatch) {
 /*!************************************!*\
   !*** ./client/components/index.js ***!
   \************************************/
-/*! exports provided: Navbar, UserHome, LogIn, SignUp, Checkout */
+/*! exports provided: Navbar, LogIn, SignUp, Checkout */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -988,23 +988,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _navbar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./navbar */ "./client/components/navbar.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Navbar", function() { return _navbar__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
-/* harmony import */ var _user_home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user-home */ "./client/components/user-home.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "UserHome", function() { return _user_home__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+/* harmony import */ var _AuthForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AuthForm */ "./client/components/AuthForm.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LogIn", function() { return _AuthForm__WEBPACK_IMPORTED_MODULE_1__["LogIn"]; });
 
-/* harmony import */ var _AuthForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AuthForm */ "./client/components/AuthForm.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "LogIn", function() { return _AuthForm__WEBPACK_IMPORTED_MODULE_2__["LogIn"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SignUp", function() { return _AuthForm__WEBPACK_IMPORTED_MODULE_1__["SignUp"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SignUp", function() { return _AuthForm__WEBPACK_IMPORTED_MODULE_2__["SignUp"]; });
-
-/* harmony import */ var _checkout_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./checkout-form */ "./client/components/checkout-form.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Checkout", function() { return _checkout_form__WEBPACK_IMPORTED_MODULE_3__["Checkout"]; });
+/* harmony import */ var _checkout_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./checkout-form */ "./client/components/checkout-form.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Checkout", function() { return _checkout_form__WEBPACK_IMPORTED_MODULE_2__["Checkout"]; });
 
 /**
  * `components/index.js` exists simply as a 'central export' for our components.
  * This way, we can import all of our components from the same place, rather than
  * having to figure out which file they belong to!
  */
-
 
 
 
@@ -1080,53 +1076,6 @@ var mapDispatch = function mapDispatch(dispatch) {
 Navbar.propTypes = {
   handleClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
   isLoggedIn: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool.isRequired
-};
-
-/***/ }),
-
-/***/ "./client/components/user-home.js":
-/*!****************************************!*\
-  !*** ./client/components/user-home.js ***!
-  \****************************************/
-/*! exports provided: UserHome, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserHome", function() { return UserHome; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
-
-
-/**
- * COMPONENT
- */
-
-var UserHome = function UserHome(props) {
-  var email = props.email;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Welcome, ", email));
-};
-/**
- * CONTAINER
- */
-
-var mapState = function mapState(state) {
-  return {
-    email: state.user.email
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapState)(UserHome));
-/**
- * PROP TYPES
- */
-
-UserHome.propTypes = {
-  email: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
 };
 
 /***/ }),
