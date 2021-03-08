@@ -448,7 +448,8 @@ var useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["ma
   };
 });
 var NavBar = function NavBar(_ref) {
-  var isLoggedIn = _ref.isLoggedIn;
+  var isLoggedIn = _ref.isLoggedIn,
+      handleLogout = _ref.handleLogout;
   var classes = useStyles();
 
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(null),
@@ -495,20 +496,25 @@ var NavBar = function NavBar(_ref) {
   }, "My Account"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_8__["default"], {
     onClick: handleClose
   }, "Order History"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    onClick: _store__WEBPACK_IMPORTED_MODULE_12__["logout"]
+    onClick: handleLogout
   }, "Log Out"))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_14__["Link"], {
     to: "/login"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_11__["default"], {
     color: "primary",
     variant: "contained",
     disableElevation: true
-  }, "Login")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    "aria-label": "cart of current user",
-    "aria-controls": "menu-appbar",
-    "aria-haspopup": "true" // onClick={console.log('cart clikced!')}
-    ,
-    color: "inherit"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_ShoppingCartOutlined__WEBPACK_IMPORTED_MODULE_10___default.a, null))))));
+  }, "Login")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_14__["Link"], {
+    to: "/cart",
+    style: {
+      color: 'white'
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_5__["default"] // aria-label="cart of current user"
+  // aria-controls="menu-appbar"
+  // aria-haspopup="true"
+  , {
+    color: "inherit",
+    variant: "contained"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_ShoppingCartOutlined__WEBPACK_IMPORTED_MODULE_10___default.a, null)))))));
 };
 
 var mapState = function mapState(state) {
@@ -519,7 +525,7 @@ var mapState = function mapState(state) {
 
 var mapDispatch = function mapDispatch(dispatch) {
   return {
-    logout: function logout() {
+    handleLogout: function handleLogout() {
       return dispatch(Object(_store__WEBPACK_IMPORTED_MODULE_12__["logout"])());
     }
   };

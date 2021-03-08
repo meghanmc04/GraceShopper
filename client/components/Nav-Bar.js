@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export const NavBar = ({isLoggedIn}) => {
+export const NavBar = ({isLoggedIn, handleLogout}) => {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = React.useState(null)
 
@@ -77,7 +77,7 @@ export const NavBar = ({isLoggedIn}) => {
               >
                 <MenuItem onClick={handleClose}>My Account</MenuItem>
                 <MenuItem onClick={handleClose}>Order History</MenuItem>
-                <MenuItem onClick={logout}>Log Out</MenuItem>
+                <MenuItem onClick={handleLogout}>Log Out</MenuItem>
               </Menu>
             </div>
           ) : (
@@ -89,15 +89,17 @@ export const NavBar = ({isLoggedIn}) => {
           )}
 
           <div>
-            <IconButton
-              aria-label="cart of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              // onClick={console.log('cart clikced!')}
-              color="inherit"
-            >
-              <ShoppingCart />
-            </IconButton>
+            <Link to="/cart" style={{color: 'white'}}>
+              <IconButton
+                // aria-label="cart of current user"
+                // aria-controls="menu-appbar"
+                // aria-haspopup="true"
+                color="inherit"
+                variant="contained"
+              >
+                <ShoppingCart />
+              </IconButton>
+            </Link>
           </div>
         </Toolbar>
       </AppBar>
@@ -110,7 +112,7 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  logout: () => dispatch(logout())
+  handleLogout: () => dispatch(logout())
 })
 
 export default connect(mapState, mapDispatch)(NavBar)
